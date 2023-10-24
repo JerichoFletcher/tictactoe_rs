@@ -1,10 +1,7 @@
-pub mod structs;
-
 use std::io::Write;
 use std::process::ExitCode;
 
-use structs::board::Board;
-use structs::mark::Mark;
+use tictactoe_core::{board::Board, mark::Mark};
 
 fn main() -> ExitCode {
     let mut board = Board::new();

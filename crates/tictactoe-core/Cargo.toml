@@ -1,14 +1,8 @@
 [package]
-name = "tictactoe"
+name = "tictactoe-core"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[workspace]
-members = [
-    "crates/tictactoe-core",
-]
-
 [dependencies]
-tictactoe-core = { path = "crates/tictactoe-core" }
