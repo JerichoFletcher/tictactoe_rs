@@ -1,11 +1,12 @@
 pub mod structs;
 
 use std::io::Write;
+use std::process::ExitCode;
 
 use structs::board::Board;
 use structs::mark::Mark;
 
-fn main() {
+fn main() -> ExitCode {
     let mut board = Board::new();
 
     'game: loop {
@@ -24,7 +25,7 @@ fn main() {
 
         println!("It's player {}'s turn!\n{}", board.turn(), board);
         'input: loop {
-            let mut inp_i: [usize; 2] = [0; 2];
+            let mut inp_i = [0; 2];
 
             print!("Move (<row> <col>): ");
             std::io::stdout().flush().unwrap();
@@ -32,7 +33,10 @@ fn main() {
             let mut inp = String::new();
             match std::io::stdin().read_line(&mut inp) {
                 Ok(_) => (),
-                Err(e) => println!("Error while reading line: {e}")
+                Err(e) => {
+                    println!("Error while reading line: {e}");
+                    return ExitCode::FAILURE;
+                }
             }
 
             let args: Vec<&str> = inp.trim().split_ascii_whitespace().collect();
@@ -53,4 +57,6 @@ fn main() {
 
         println!();
     }
+
+    return ExitCode::SUCCESS;
 }
